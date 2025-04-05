@@ -13,7 +13,7 @@ class GameBoard extends PositionComponent {
     Vector2? position,
     Vector2? size,
   })  : gridPaint = Paint()
-          ..color = Colors.white.withOpacity(0.5)
+          ..color = Colors.white.withAlpha(128)
           ..strokeWidth = 1.0,
         super(position: position ?? Vector2.zero(), size: size ?? Vector2.zero());
 

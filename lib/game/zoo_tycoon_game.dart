@@ -40,7 +40,7 @@ class ZooTycoonGame extends FlameGame with WidgetsBindingObserver {
     gameState = GameState(money: 0, buildings: []);
     
     // Chargement et ajout du background
-    final bgImage = await images.load('background.png');
+    final bgImage = await images.load('black_background.png');
     background = SpriteComponent(
       sprite: Sprite(bgImage),
       size: size,
