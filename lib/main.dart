@@ -22,8 +22,21 @@ void main() {
             ),
           );
         },
+        
+        'resetButton': (BuildContext context, ZooTycoonGame game) {
+          return Positioned(
+            bottom: 20,
+            left: 20,
+            child: ElevatedButton(
+              onPressed: () {
+                game.resetMoney();
+              },
+              child: const Text('reset'),
+            ),
+          );
+        },
       },
-      initialActiveOverlays: const ['moneyButton'],
+      initialActiveOverlays: const ['moneyButton', 'resetButton'],
     ),
   );
 }
@@ -38,7 +51,7 @@ class ZooTycoonGame extends FlameGame with WidgetsBindingObserver {
   @override
   Future<void> onLoad() async {
     // Charger et ajouter le background
-    final bgImage = await images.load('assets/background.png');
+    final bgImage = await images.load('background.png');
     background = SpriteComponent(
       sprite: Sprite(bgImage),
       size: size,
@@ -70,6 +83,12 @@ class ZooTycoonGame extends FlameGame with WidgetsBindingObserver {
   // Méthode pour ajouter de l'argent et planifier une sauvegarde différée
   void addMoney(int amount) {
     money += amount;
+    moneyText.text = 'Argent: $money';
+    _scheduleSave();
+  }
+
+  void resetMoney() {
+    money = 0;
     moneyText.text = 'Argent: $money';
     _scheduleSave();
   }
