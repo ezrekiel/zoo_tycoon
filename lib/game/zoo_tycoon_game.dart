@@ -5,6 +5,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/game_state.dart';
+import 'game_board.dart'; // Importez le plateau de jeu
 
 class ZooTycoonGame extends FlameGame with WidgetsBindingObserver {
   late GameState gameState;
@@ -12,18 +13,48 @@ class ZooTycoonGame extends FlameGame with WidgetsBindingObserver {
   late TextComponent moneyText;
   dart_async.Timer? _saveTimer;
 
-  @override
+  void selectBuildingSlot() {
+  // Cette méthode sera appelée lorsque le joueur tape sur un emplacement de construction
+  // Vous pouvez y stocker des informations sur l'emplacement sélectionné pour l'utiliser dans le menu
+  // Par exemple, gameState.selectedSlot = <l'emplacement concerné>;
+    
+  // Affiche le menu d'interaction pour l'emplacement sélectionné
+    overlays.add('constructionMenu');
+  }
+
+  // Méthode appelée lorsque le bouton "Construire" est pressé dans le menu
+  void buildOnSelectedSlot() {
+    // Implémentez ici la logique de construction (par exemple, déduire le coût, placer un bâtiment, etc.)
+    print("Construction effectuée sur l'emplacement sélectionné.");
+  }
+
+  // Méthode appelée lorsque le bouton "Infos" est pressé dans le menu
+  void showSlotInfo() {
+    // Vous pouvez par exemple afficher une popup ou une autre overlay avec les informations de l'emplacement
+    print("Affichage des informations de l'emplacement sélectionné.");
+  }
+
+@override
   Future<void> onLoad() async {
     // Initialisation de l'état par défaut
     gameState = GameState(money: 0, buildings: []);
     
-    // Chargement et ajout du background (vérifiez le chemin de l'image)
+    // Chargement et ajout du background
     final bgImage = await images.load('background.png');
     background = SpriteComponent(
       sprite: Sprite(bgImage),
       size: size,
     );
     add(background);
+
+    // Créer et ajouter le plateau de jeu (ici, une grille 10x10)
+    final board = GameBoard(
+      rows: 10,
+      columns: 10,
+      position: Vector2.zero(),
+      size: size,
+    );
+    add(board);
 
     // Création et ajout d'un TextComponent pour afficher l'argent
     moneyText = TextComponent(

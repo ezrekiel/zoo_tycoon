@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  flame: ^1.0.0 # Vérifiez sur pub.dev pour la dernière version
+  flame: ^1.27.0 # Vérifiez sur pub.dev pour la dernière version
   shared_preferences: ^2.5.3
 
 dev_dependencies:

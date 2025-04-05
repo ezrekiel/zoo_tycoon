@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zoo_tycoon/main.dart';
+import 'package:zoo_tycoon/game/zoo_tycoon_game.dart'; // Import corrigé
 
 void main() {
   testWidgets('Test de présence du GameWidget', (WidgetTester tester) async {
